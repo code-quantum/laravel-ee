@@ -1,0 +1,2 @@
+# laravel-ee
+elasticemail
