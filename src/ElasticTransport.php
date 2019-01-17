@@ -104,6 +104,9 @@ class ElasticTransport extends Transport
             $this->deleteTempAttachmentFiles($data, $attachmentCount);
         }
 
+        \Log::debug("email:");
+        \Log::debug($result);
+
         return $result;
     }
 
@@ -180,9 +183,18 @@ class ElasticTransport extends Transport
      */
     protected function getFromAddress(Swift_Mime_Message $message)
     {
+        $email = array_keys($message->getFrom())[0];
+        if(empty($email)) {
+            $email = \Config::get('mail.from.address');
+        }
+        $name = array_values($message->getFrom())[0];
+        if(empty($name)) {
+            $email = \Config::get('mail.from.name');
+        }
+
         return [
-            'email' => array_keys($message->getFrom())[0],
-            'name' => array_values($message->getFrom())[0],
+            'email' => $email,
+            'name' => $name
         ];
     }
 
