@@ -1,0 +1,23 @@
+{
+  "name": "code-quantum/laravel-ee",
+  "description": "Package for send emails with attachments via elastic email driver",
+  "keywords": [
+    "laravel",
+    "email driver",
+    "elastic email"
+  ],
+  "license": "MIT",
+  "authors": [
+  ],
+  "support": {
+  },
+  "require": {
+    "laravel/framework": "~5.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "LaravelEE\\LaravelElasticEmail\\": "src/"
+    }
+  },
+  "minimum-stability": "stable"
+}
