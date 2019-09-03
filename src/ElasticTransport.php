@@ -62,6 +62,10 @@ class ElasticTransport extends Transport
     {
 
         $this->beforeSendPerformed($message);
+        
+        $to = explode(',', $this->getEmailAddresses($message));
+        $bcc = explode(',', $this->getEmailAddresses($message, 'getBcc'));
+        $to = array_merge($to, $bcc);
 
         $data = [
             'api_key' => $this->key,
@@ -73,7 +77,7 @@ class ElasticTransport extends Transport
             'msgFromName' => $this->getFromAddress($message)['name'],
             'from' => $this->getFromAddress($message)['email'],
             'fromName' => $this->getFromAddress($message)['name'],
-            'to' => $this->getEmailAddresses($message),
+            'to' => implode(',', $to),
             'subject' => $message->getSubject(),
             'body_html' => $message->getBody(),
             'body_text' => $this->getText($message),
